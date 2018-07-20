@@ -4,7 +4,7 @@ ALL = hello
 
 all: $(ALL)
 
-hello: hello.cpp Makefile
+hello: 1_1.cpp Makefile
 	$(CXX) $(CXXFLAGS) -o $@ $@.cpp
 
 clean:

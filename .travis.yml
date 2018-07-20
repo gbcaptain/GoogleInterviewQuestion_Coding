@@ -1,24 +1,29 @@
-matrix:
-  include:
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
-
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew install gcc5 && CC=gcc-5 && CXX=g++-5"
-
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew install gcc6 && CC=gcc-6 && CXX=g++-6"
-
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
+sudo: true
 
 before_install:
-    - eval "${MATRIX_EVAL}"
+  - sudo add-apt-repository -y ppa:lyx-devel/release
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install -qq lyx
+  - sudo apt-get install -qq texlive
+  #- sudo apt-get install -qq texlive*
+  #- sudo apt-get install -qq texlive-latex-extra
+  #- sudo apt-get install -qq texlive-fonts-extra
+  - sudo apt-get install -qq pgf
+  - sudo apt-get install -qq graphviz
+  - sudo apt-get install -qq qtikz
+  #- sudo apt-get install -qq tlmgr
+  #- sudo tlmgr pgf ms
+
+script:
+
+
+after_script:
+
+
+after_success:
+  - echo "success"
+ 
+after_failure:
+  - echo "failure"

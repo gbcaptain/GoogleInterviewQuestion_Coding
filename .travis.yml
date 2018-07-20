@@ -1,29 +1,19 @@
-sudo: true
-
-before_install:
-  - sudo add-apt-repository -y ppa:lyx-devel/release
-  - sudo apt-get update -qq
-
+sudo: false
+language: cpp
+compiler:
+  - gcc
+  - clang
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.8
+    packages:
+    - g++-6
+    - clang-3.8
 install:
-  - sudo apt-get install -qq lyx
-  - sudo apt-get install -qq texlive
-  #- sudo apt-get install -qq texlive*
-  #- sudo apt-get install -qq texlive-latex-extra
-  #- sudo apt-get install -qq texlive-fonts-extra
-  - sudo apt-get install -qq pgf
-  - sudo apt-get install -qq graphviz
-  - sudo apt-get install -qq qtikz
-  #- sudo apt-get install -qq tlmgr
-  #- sudo tlmgr pgf ms
-
+- "[ $CXX = g++ ] && export CXX=g++-6 || true"
+- "[ $CXX = clang++ ] && export CXX=clang++-3.8 || true"
 script:
-
-
-after_script:
-
-
-after_success:
-  - echo "success"
- 
-after_failure:
-  - echo "failure"
+  - make
+  - make test
